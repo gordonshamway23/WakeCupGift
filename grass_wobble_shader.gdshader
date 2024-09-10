@@ -1,6 +1,7 @@
 // NOTE: Shader automatically converted from Godot Engine 3.5.3.stable's SpatialMaterial.
 
 shader_type spatial;
+// skip_vertex_transform is important, so one can change vertex transformation
 render_mode skip_vertex_transform,async_visible,blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
 uniform vec4 albedo : hint_color;
 uniform sampler2D texture_albedo : hint_albedo;
@@ -18,7 +19,10 @@ uniform float shear_wobble_speed = 1.0;
 
 void vertex() {
 	vec4 vert_pos_world = WORLD_MATRIX * vec4(VERTEX, 1.0);
-	float shear_wobble_phase = vert_pos_world.x + vert_pos_world.y + vert_pos_world.z;
+	
+	//sin phase derived from vertex world position, so that not all sprite wobble the same :)
+	float shear_wobble_phase = vert_pos_world.x + vert_pos_world.y + vert_pos_world.z; 
+	
 	float shear_wobble = sin(TIME*shear_wobble_speed + shear_wobble_phase) * shear_wobble_strength;
 	mat4 shear_wobble_mat = mat4(vec4(1,0,0,0), vec4(shear_wobble,1,0,0), vec4(0,0,1,0), vec4(0,0,0,1));
 	VERTEX = (INV_CAMERA_MATRIX * shear_wobble_mat * vert_pos_world).xyz;
