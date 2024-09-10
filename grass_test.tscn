@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://grass_wobble_shader.gdshader" type="Shader" id=1]
+[ext_resource path="res://grass_tuft.png" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.14902, 0.321569, 0, 1 )
+
+[sub_resource type="CubeMesh" id=4]
+material = SubResource( 3 )
+size = Vector3( 30, 1, 30 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/shear_wobble_strength = 0.25
+shader_param/shear_wobble_speed = 2.0
+shader_param/texture_albedo = ExtResource( 2 )
+
+[node name="GrassTest" type="Spatial"]
+
+[node name="Ground" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+mesh = SubResource( 4 )
+
+[node name="GrassTuft" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, 0, 0.216167, 0 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, -1.20352, 0.216167, -0.953532 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft3" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, 1.37837, 0.216167, -1.28335 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft4" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, 1.42834, 0.216167, 0.451595 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft5" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, -1.62216, 0.216167, 0.690785 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft6" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, -2.93169, 0.216167, -1.31482 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft7" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, -0.105579, 0.216167, -2.205 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft8" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, 2.84621, 0.216167, -0.384897 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft9" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, -0.453214, 0.216167, 1.45343 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft10" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, -3.38214, 0.216167, 0.771299 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft11" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, 3.64872, 0.216167, -2.44302 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft12" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, 3.89496, 0.216167, 0.573906 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft13" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, 1.93747, 0.216167, 1.56159 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="GrassTuft14" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939184, 0.343414, 0, -0.343414, 0.939184, -2.05023, 0.216167, -2.76359 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.999451, -0.0278998, 0.0178441, 0, 0.538801, 0.842433, -0.0331182, -0.841971, 0.538506, 0.097144, 2.5516, 1.81678 )
+fov = 89.4739
