@@ -1,5 +1,7 @@
 // NOTE: Shader automatically converted from Godot Engine 3.5.3.stable's SpatialMaterial.
 
+// This shader could theoretically also work on a mesh instance, but I think a 3d sprite is enough for grass.
+
 shader_type spatial;
 // skip_vertex_transform is important, so one can change vertex transformation
 render_mode skip_vertex_transform,async_visible,blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
@@ -8,26 +10,33 @@ uniform sampler2D texture_albedo : hint_albedo;
 uniform float specular;
 uniform float metallic;
 uniform float roughness : hint_range(0,1);
-uniform float point_size : hint_range(0,128);
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
 
+// shear wobble animation strength
 uniform float shear_wobble_strength = 0.5;
+
+// shear wobble animation speed
 uniform float shear_wobble_speed = 1.0;
 
+//how many variations of grass tufts are in the texture
+uniform int count_variants = 1;
+
 void vertex() {
-	vec4 vert_pos_world = WORLD_MATRIX * vec4(VERTEX, 1.0);
+	//position of the node origin in world space
+	vec4 obj_pos_world = WORLD_MATRIX * vec4(0.0,0.0,0.0,1.0);
 	
-	//sin phase derived from vertex world position, so that not all sprite wobble the same :)
-	float shear_wobble_phase = vert_pos_world.x + vert_pos_world.y + vert_pos_world.z; 
+	//a number that varies by world position of the node
+	float variation = (obj_pos_world.x + obj_pos_world.y + obj_pos_world.z) * 10.0;
 	
+	//let vertex wobble by shearing it
+	//sin phase derived from node world position, so that not all grass tufts wobble the same :)
+	float shear_wobble_phase = variation; 
 	float shear_wobble = sin(TIME*shear_wobble_speed + shear_wobble_phase) * shear_wobble_strength;
 	mat4 shear_wobble_mat = mat4(vec4(1,0,0,0), vec4(shear_wobble,1,0,0), vec4(0,0,1,0), vec4(0,0,0,1));
-	VERTEX = (INV_CAMERA_MATRIX * shear_wobble_mat * vert_pos_world).xyz;
+	VERTEX = (INV_CAMERA_MATRIX * shear_wobble_mat * WORLD_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	
-	UV=UV*uv1_scale.xy+uv1_offset.xy;
+	// select a grass tuft variant depending on world pos
+	int variant_index = int(variation) % count_variants;
+	UV.x = (float(variant_index)+UV.x)/float(count_variants);
 }
 
 
